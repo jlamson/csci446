@@ -1,5 +1,6 @@
 body {
 	background-color: #aaaaaa;
+	font-family: Arial, Sans-Serif
 }
 
 div.top_layer {
@@ -7,23 +8,52 @@ div.top_layer {
 	margin-right: auto;
 	margin-left: auto;
 	border: 2px solid black;
+	padding: 0px;
 }
 
 div#header {
 	background-color: #cccccc;
 }
 
+div#header h1 {
+	font-size: 2.5em;
+	letter-spacing: -2px;
+	font-weight: bold;
+	margin: 10px 0 0 15px;
+}
+
+div#header h2 {
+	color: #656565;
+	margin: 0 0 15px 15px;
+	font-size: .9em
+}
+
 div#menubar {
 	background-color: black;
 }
 
-div#menubar li {
+div#menubar ul {
 	color: white;
+	list-style-type: none;
+	margin: 8px;
+	padding: 0;
+}
+
+div#menubar li {
+	display: inline;
+	margin: 0 25px 0 0;
+	padding: 15px 0 15px 0;
 }
 
 div#main_content {
 	background-color: #fcfcfc;
 }
+
+div#main_content h1 {
+	margin: 10px 0 0 15px;
+	font-size: 2em;
+}
+
 
 div#progress {
 	background-color: #f0f1ff;

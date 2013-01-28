@@ -12,7 +12,10 @@ class HelloWorld
 	end
 
 	def generate_form()
-		[200, {"Content-Type" => "text/plain"}, ["form"]]	
+		file = File.open("form.html", "rb")
+		page = file.read
+		file.close
+		[200, {"Content-Type" => "text/html"}, [page]]	
 	end
 
 	def generate_list()

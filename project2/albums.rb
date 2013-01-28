@@ -14,14 +14,15 @@ class HelloWorld
 
 	def generate_form(request)
 		page = get_page("form.html")
-		title = "foo"
-		content = "blah"
 		erb = ERB.new(page).result(binding)
 		[200, {"Content-Type" => "text/html"}, [erb]]	
 	end
 
 	def generate_list(request)
-		[200, {"Content-Type" => "text/plain"}, ["list"]]
+		page = get_page("list.html")
+		order = "rank"
+		erb = ERB.new(page).result(binding)
+		[200, {"Content-Type" => "text/html"}, [erb]]
 	end
 
 	private
@@ -31,6 +32,7 @@ class HelloWorld
 		file.close
 		page
 	end
+
 end
 
 Signal.trap('INT') {

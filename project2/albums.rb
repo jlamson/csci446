@@ -41,7 +41,19 @@ class HelloWorld
 	def get_sorted_list(order)
 		file = File.open("top_100_albums.txt", "r")
 		list = file.readlines
-		list
+		
+		rank = 0
+		list.map! do |line| 
+			rank += 1
+			[rank, line.chomp.split(", ")[0], line.chomp.split(", ")[1]]
+		end
+
+		case order
+		when "year" then list.sort { |a, b| a[2] <=> b[2] }
+		when "name" then list.sort { |a, b| a[1] <=> b[1] }
+		else list
+		end
+
 	end
 
 end

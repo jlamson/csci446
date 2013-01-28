@@ -19,8 +19,13 @@ class HelloWorld
 	end
 
 	def generate_list(request)
+		order = request.params['order']
+		order ||= "rank"
+		list = get_sorted_list(order)
+
+		rank = request.params['rank']
+
 		page = get_page("list.html")
-		order = "rank"
 		erb = ERB.new(page).result(binding)
 		[200, {"Content-Type" => "text/html"}, [erb]]
 	end
@@ -31,6 +36,12 @@ class HelloWorld
 		page = file.read
 		file.close
 		page
+	end
+
+	def get_sorted_list(order)
+		file = File.open("top_100_albums.txt", "r")
+		list = file.readlines
+		list
 	end
 
 end

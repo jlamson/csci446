@@ -6,6 +6,11 @@
 	<body>
 		<h1>Rolling Stone's Top 100 Albums of All Time</h1>
 		<h2>Sorted by <%= order %></h2>
-		
+		<table>
+		<% list.each do |album| %>
+			<tr>
+				<td><%= album %></td> 
+			</tr>
+		<% end %> 
 	</body>
 </html>

@@ -17,10 +17,10 @@
 				<th>Year</th>
 			</th>	
 			<% list.each do |album| %>
-				<tr class="rank<%= album[0] %>">
-					<td><%= album[0] %></td> 
-					<td><%= album[1] %></td> 
-					<td><%= album[2] %></td> 
+				<tr class="rank<%= album.rank %>">
+					<td><%= album.rank %></td> 
+					<td><%= album.name %></td> 
+					<td><%= album.year %></td> 
 				</tr>
 			<% end %> 
 		</table>

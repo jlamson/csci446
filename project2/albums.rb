@@ -48,13 +48,25 @@ class HelloWorld
 		rank = 0
 		list.map! do |line| 
 			rank += 1
-			[rank, line.chomp.split(", ")[0], line.chomp.split(", ")[1]]
+			Album.new(rank, line.chomp.split(", ")[0], line.chomp.split(", ")[1])
 		end
 
 		case order
-		when "year" then list.sort { |a, b| a[2] <=> b[2] }
-		when "name" then list.sort { |a, b| a[1] <=> b[1] }
+		when "year" then list.sort { |a, b| a.year <=> b.year }
+		when "name" then list.sort { |a, b| a.name <=> b.name }
 		else list
+		end
+
+	end
+
+	class Album
+		
+		attr_accessor :rank
+		attr_accessor :name
+		attr_accessor :year
+
+		def initialize(rank, name, year)
+			@rank, @name, @year = rank, name, year
 		end
 
 	end

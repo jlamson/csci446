@@ -62,11 +62,11 @@ class HelloWorld
 	class Album
 		
 		attr_accessor :rank
-		attr_accessor :year
 		attr_accessor :name
+		attr_accessor :year
 
-		def initialize(rank, year, name)
-			@rank, @year, @name = rank, year, name
+		def initialize(rank, name, year)
+			@rank, @name, @year = rank, name, year
 		end
 
 	end

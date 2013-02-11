@@ -3,6 +3,7 @@
 #
 require 'rack'
 require 'erb'
+require 'sqlite3'
 
 class HelloWorld
 	def call(env)
@@ -23,7 +24,6 @@ class HelloWorld
 
 	def generate_list(request)
 		order = request.params['order']
-		order ||= "rank"
 		list = get_sorted_list(order)
 
 		rank = request.params['rank']
@@ -42,19 +42,14 @@ class HelloWorld
 	end
 
 	def get_sorted_list(order)
-		file = File.open("top_100_albums.txt", "r")
-		list = file.readlines
-		
-		rank = 0
-		list.map! do |line| 
-			rank += 1
-			Album.new(rank, line.chomp.split(", ")[0], line.chomp.split(", ")[1])
-		end
+
+		db = SQLite3::Database.new("albums.sqlite3.db")
+		db.results_as_hash = true
 
 		case order
-		when "year" then list.sort { |a, b| a.year <=> b.year }
-		when "name" then list.sort { |a, b| a.name <=> b.name }
-		else list
+		when "year" then db.execute("SELECT * FROM albums ORDER BY year").map { |row| Album.new(row["rank"], row["title"], row["year"]) }
+		when "name" then db.execute("SELECT * FROM albums ORDER BY title").map { |row| Album.new(row["rank"], row["title"], row["year"]) }
+		else db.execute("SELECT * FROM albums ORDER BY rank").map { |row| Album.new(row["rank"], row["title"], row["year"]) }
 		end
 
 	end

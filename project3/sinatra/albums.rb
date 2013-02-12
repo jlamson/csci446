@@ -58,9 +58,9 @@ class RollingStonesAlbumApp
 		db.results_as_hash = true
 
 		case order
-		when "year" then db.execute("SELECT * FROM albums ORDER BY year").map { |row| Album.new(row["rank"], row["title"], row["year"]) }
-		when "name" then db.execute("SELECT * FROM albums ORDER BY title").map { |row| Album.new(row["rank"], row["title"], row["year"]) }
-		else db.execute("SELECT * FROM albums ORDER BY rank").map { |row| Album.new(row["rank"], row["title"], row["year"]) }
+		when "year" then db.execute("SELECT * FROM albums ORDER BY year;") { |row| Album.new(row["rank"], row["title"], row["year"]) }
+		when "name" then db.execute("SELECT * FROM albums ORDER BY title;") { |row| Album.new(row["rank"], row["title"], row["year"]) }
+		else db.execute("SELECT * FROM albums ORDER BY rank;") { |row| Album.new(row["rank"], row["title"], row["year"]) }
 		end
 
 	end

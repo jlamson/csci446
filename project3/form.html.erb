@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Top 100 Albums of All Time</title>
+	</head>
+	<body>
+		<h1>Rolling Stone's Top 100 Albums of All Time</h1>
+		<form action="/list" method="GET">
+			<label for="order">Sort by</label>
+			<select name="order" id="order">
+				<option value="rank">Rank (default)</option>
+				<option value="name">Name</option>
+				<option value="year">Year</option>
+			</select>
+			<br />
+			<label for="rank">elect a rank to highlight</label>
+			<select name="rank" id="rank">
+				<% 1.upto(100) do |i| %>
+					<option value=<%=i%>><%=i%></option>
+				<% end %>
+			</select>
+			<br />
+			<input type="submit" value="Display List" />
+		</form>
+	</body>
+</html>

@@ -1,12 +1,16 @@
 #
-# Project 2, Joshua Lamson
+# Project 3, Joshua Lamson
 #
+
 require 'rack'
 require 'erb'
 require 'sqlite3'
+require_relative 'album'
 
-class HelloWorld
+class RollingStonesAlbumApp
+
 	def call(env)
+	
 		request = Rack::Request.new(env)
 
 		case request.path
@@ -14,15 +18,19 @@ class HelloWorld
 		when "/list" then generate_list(request)
 		else [404, {"Content-Type" => "text/plain"}, ["OH SHIT!\n"]]
 		end
+	
 	end
 
 	def generate_form(request)
+	
 		page = get_page("form.html.erb")
 		erb = ERB.new(page).result(binding)
 		[200, {"Content-Type" => "text/html"}, [erb]]	
+	
 	end
 
 	def generate_list(request)
+	
 		order = request.params['order']
 		list = get_sorted_list(order)
 		rank = request.params['rank']
@@ -30,14 +38,18 @@ class HelloWorld
 		page = get_page("list.html.erb")
 		erb = ERB.new(page).result(binding)
 		[200, {"Content-Type" => "text/html"}, [erb]]
+	
 	end
 
 	private
+	
 	def get_page(path)
+
 		file = File.open(path, "rb")
 		page = file.read
 		file.close
 		page
+	
 	end
 
 	def get_sorted_list(order)
@@ -53,22 +65,10 @@ class HelloWorld
 
 	end
 
-	class Album
-		
-		attr_accessor :rank
-		attr_accessor :name
-		attr_accessor :year
-
-		def initialize(rank, name, year)
-			@rank, @name, @year = rank, name, year
-		end
-
-	end
-
 end
 
 Signal.trap('INT') {
   Rack::Handler::WEBrick.shutdown
 }
-Rack::Handler::WEBrick.run HelloWorld.new, :Port => 8080
+Rack::Handler::WEBrick.run RollingStonesAlbumApp.new, :Port => 8080
 

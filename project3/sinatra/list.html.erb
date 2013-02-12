@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Top 100 Albums of All Time</title>
+		<style>
+			.rank<%= rank %> {background-color:black;color:white;}
+		</style>
+	</head>
+	<body>
+		<h1>Rolling Stone's Top 100 Albums of All Time</h1>
+		<h2>Sorted by <%= order %></h2>
+		<h3></h3>
+		<table>
+			<tr>
+				<th>Rank</th>
+				<th>Name</th>
+				<th>Year</th>
+			</th>	
+			<% list.each do |album| %>
+				<tr class="rank<%= album.rank %>">
+					<td><%= album.rank %></td> 
+					<td><%= album.name %></td> 
+					<td><%= album.year %></td> 
+				</tr>
+			<% end %> 
+		</table>
+	</body>
+</html>

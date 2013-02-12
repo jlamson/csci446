@@ -25,7 +25,6 @@ class HelloWorld
 	def generate_list(request)
 		order = request.params['order']
 		list = get_sorted_list(order)
-
 		rank = request.params['rank']
 
 		page = get_page("list.html.erb")

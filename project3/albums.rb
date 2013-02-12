@@ -17,7 +17,7 @@ class HelloWorld
 	end
 
 	def generate_form(request)
-		page = get_page("form.html")
+		page = get_page("form.html.erb")
 		erb = ERB.new(page).result(binding)
 		[200, {"Content-Type" => "text/html"}, [erb]]	
 	end
@@ -28,7 +28,7 @@ class HelloWorld
 
 		rank = request.params['rank']
 
-		page = get_page("list.html")
+		page = get_page("list.html.erb")
 		erb = ERB.new(page).result(binding)
 		[200, {"Content-Type" => "text/html"}, [erb]]
 	end
@@ -72,3 +72,4 @@ Signal.trap('INT') {
   Rack::Handler::WEBrick.shutdown
 }
 Rack::Handler::WEBrick.run HelloWorld.new, :Port => 8080
+

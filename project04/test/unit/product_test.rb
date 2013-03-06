@@ -2,6 +2,8 @@ require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
   
+  fixtures :products
+
   def new_product(image_url) 
   	Product.new(title: "Some Book",
                 description: "lorum ipsum",

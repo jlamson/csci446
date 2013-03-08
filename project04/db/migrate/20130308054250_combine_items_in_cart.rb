@@ -11,5 +11,15 @@ class CombineItemsInCart < ActiveRecord::Migration
   end
 
   def down
-  end
+    LineItem.where("quantity > 1").each do |lineitem|
+      
+      lineitem.quantity.times do
+        LineItem.create :cart_id=>lineitem.cart_id, :product_id=>lineitem.product_id, :quantity=>1
+      end
+    
+      lineitem.destroy
+
+    end 
+  end 
+  
 end
